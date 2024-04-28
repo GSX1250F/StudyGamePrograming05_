@@ -34,6 +34,7 @@ void BGSpriteComponent::Draw(Shader* shader)
 			static_cast<float>(mScreenSize.x),
 			static_cast<float>(mScreenSize.y),
 			1.0f);
+		// テクスチャのオフセット（平行移動）
 		Matrix4 offsetMat = Matrix4::CreateTranslation(
 			Vector3(static_cast<int>(mOwner->GetPosition().x - mScreenSize.x / 2 + bg.mOffset.x),
 					static_cast<int>(mOwner->GetPosition().y - mScreenSize.y / 2 + bg.mOffset.y),

@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="シェーダーファイル">
+      <UniqueIdentifier>{1d521215-89e1-44da-97f3-19e1e4f91058}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor.cpp">
@@ -124,6 +127,20 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="Shaders\Basic.frag">
+      <Filter>シェーダーファイル</Filter>
+    </None>
+    <None Include="Shaders\Basic.vert">
+      <Filter>シェーダーファイル</Filter>
+    </None>
+    <None Include="Shaders\Sprite.frag">
+      <Filter>シェーダーファイル</Filter>
+    </None>
+    <None Include="Shaders\Sprite.vert">
+      <Filter>シェーダーファイル</Filter>
+    </None>
+    <None Include="Shaders\Transform.vert">
+      <Filter>シェーダーファイル</Filter>
+    </None>
   </ItemGroup>
 </Project>

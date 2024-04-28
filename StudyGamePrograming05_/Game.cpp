@@ -243,36 +243,15 @@ void Game::LoadData()
 {
 	//ƒvƒŒƒCƒ„[‚Ì‰F’ˆ‘D‚ğì¬
 	mShip = new Ship(this);
-	mShip->SetRotation(Math::PiOver2);
-	
+	//mShip->SetRotation(Math::PiOver2);
+	/*
 	// ¬˜f¯‚ğ•¡”¶¬
 	const int numAsteroids = 20;
 	for (int i = 0; i < numAsteroids; i++)
 	{
 		new Asteroid(this);
 	}
-
-	// ”wŒi—pƒAƒNƒ^[‚ğì‚é
-	Actor* bgactor = new Actor(this);
-	bgactor->SetPosition(Vector2(mWindowWidth / 2.0f, mWindowHeight / 2.0f));
-	// ˆê”ÔŒã‚ë‚Ì”wŒi‚ğì¬
-	BGSpriteComponent* bg = new BGSpriteComponent(bgactor);
-	bg->SetScreenSize(Vector2(mWindowWidth, mWindowHeight));
-	std::vector<Texture*> bgtexs = {
-		GetTexture("Assets/Farback01.png"),
-		GetTexture("Assets/Farback02.png")
-	};
-	bg->SetBGTextures(bgtexs);
-	bg->SetScrollSpeed(-100.0f);
-	// è‘O‚Ì”wŒi‚ğì¬
-	bg = new BGSpriteComponent(bgactor, 50);
-	bg->SetScreenSize(Vector2(mWindowWidth, mWindowHeight));
-	bgtexs = {
-		GetTexture("Assets/Stars.png"),
-		GetTexture("Assets/Stars.png")
-	};
-	bg->SetBGTextures(bgtexs);
-	bg->SetScrollSpeed(-50.0f);
+	*/
 }
 
 void Game::UnloadData()

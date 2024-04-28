@@ -55,7 +55,7 @@ void SpriteComponent::Draw(Shader* shader)
 
 		// ワールド変換の設定
 		shader->SetMatrixUniform("uWorldTransform", world);
-
+		// 現在のテクスチャをセット
 		mTexture->SetActive();
 
 		// 短径を描画

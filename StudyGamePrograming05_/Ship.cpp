@@ -48,10 +48,10 @@ Ship::Ship(Game* game) : Actor(game) , mLaserCooldown(0.0f)
 
 void Ship::Init()
 {
-	//ƒ‰ƒ“ƒ_ƒ€‚ÈŒü‚«‚Å‰Šú‰»
 	SetPosition(Vector2(GetGame()->mWindowWidth / 2.0f, GetGame()->mWindowHeight / 2.0f));
-	float rot = Random::GetFloatRange(0.0f, Math::TwoPi);
-	SetRotation(rot);
+	//ƒ‰ƒ“ƒ_ƒ€‚ÈŒü‚«‚Å‰Šú‰»
+	//float rot = Random::GetFloatRange(0.0f, Math::TwoPi);
+	//SetRotation(rot);
 	SetScale(0.7f);
 	SetMass(1.0f);
 
