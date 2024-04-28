@@ -6,6 +6,7 @@
 #include <algorithm>
 #include "Actor.h"
 #include "SpriteComponent.h"
+#include "BGSpriteComponent.h"
 #include "Ship.h"
 #include "Asteroid.h"
 #include "Random.h"
@@ -249,7 +250,29 @@ void Game::LoadData()
 	for (int i = 0; i < numAsteroids; i++)
 	{
 		new Asteroid(this);
-	}	
+	}
+
+	// ”wŒi—pƒAƒNƒ^[‚ðì‚é
+	Actor* bgactor = new Actor(this);
+	bgactor->SetPosition(Vector2(mWindowWidth / 2.0f, mWindowHeight / 2.0f));
+	// ˆê”ÔŒã‚ë‚Ì”wŒi‚ðì¬
+	BGSpriteComponent* bg = new BGSpriteComponent(bgactor);
+	bg->SetScreenSize(Vector2(mWindowWidth, mWindowHeight));
+	std::vector<Texture*> bgtexs = {
+		GetTexture("Assets/Farback01.png"),
+		GetTexture("Assets/Farback02.png")
+	};
+	bg->SetBGTextures(bgtexs);
+	bg->SetScrollSpeed(-100.0f);
+	// Žè‘O‚Ì”wŒi‚ðì¬
+	bg = new BGSpriteComponent(bgactor, 50);
+	bg->SetScreenSize(Vector2(mWindowWidth, mWindowHeight));
+	bgtexs = {
+		GetTexture("Assets/Stars.png"),
+		GetTexture("Assets/Stars.png")
+	};
+	bg->SetBGTextures(bgtexs);
+	bg->SetScrollSpeed(-50.0f);
 }
 
 void Game::UnloadData()
