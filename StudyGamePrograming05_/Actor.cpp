@@ -38,8 +38,9 @@ void Actor::Update(float deltaTime)
 		ComputeWorldTransform();
 
 		// ˆÊ’uî•ñ‚ğXV
- 		mPosition += mVelocity * deltaTime;
-		mRotation += mRotSpeed * deltaTime;
+ 		SetPosition(GetPosition() + mVelocity * deltaTime);
+		SetRotation(GetRotation() + mRotSpeed * deltaTime);
+		
 		UpdateComponents(deltaTime);
 		UpdateActor(deltaTime);
 

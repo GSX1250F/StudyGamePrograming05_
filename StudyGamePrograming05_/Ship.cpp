@@ -99,7 +99,7 @@ void Ship::ActorInput(const uint8_t* keyState)
 			Laser* laser = new Laser(GetGame());
 			laser->SetPosition(GetPosition() + 35.0f * GetScale() * Vector2(Math::Cos(GetRotation()), Math::Sin(GetRotation())));
 			laser->SetRotation(GetRotation());
-			laser->SetVelocity(1000.0f * Vector2(Math::Cos(GetRotation()), Math::Sin(GetRotation())));
+			laser->SetVelocity(900.0f * Vector2(Math::Cos(GetRotation()), Math::Sin(GetRotation())));
 
 			// レーザー冷却期間リセット
 			mLaserCooldown = 0.5f;
