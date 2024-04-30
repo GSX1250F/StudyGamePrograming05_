@@ -20,14 +20,9 @@ Laser::Laser(Game* game) : Actor(game),mDeathTime(2.0f)
 
 void Laser::UpdateActor(float deltaTime)
 {
-	//位置はMoveComponentで更新される。
-	//画面外にでるか、DeathTimeが0になったら消去する。
+	//DeathTimeが0になったら消去する。
 	mDeathTime -= deltaTime;
-	if(mDeathTime <= 0.0f ||
-	   GetPosition().x < 0.0f ||
-	   GetPosition().x > GetGame()->mWindowWidth ||
-	   GetPosition().y < 0.0f ||
-	   GetPosition().y > GetGame()->mWindowHeight)
+	if(mDeathTime <= 0.0f) 
 	{
 		SetState(EDead);
 	}

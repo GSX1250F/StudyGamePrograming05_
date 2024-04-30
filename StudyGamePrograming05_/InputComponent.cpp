@@ -1,6 +1,7 @@
 #include "InputComponent.h"
 #include "Actor.h"
 
+//OpenGL—p‚ÌÀ•WŒn‚ÉC³
 
 InputComponent::InputComponent(Actor* owner, int updateOrder) 
 	: MoveComponent(owner)

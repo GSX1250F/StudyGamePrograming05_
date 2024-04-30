@@ -8,6 +8,8 @@
 #include "Asteroid.h"
 #include "Texture.h"
 
+//OpenGL用に、画面中央が(0,0)、上方向に+,右方向に+の座標系に修正
+
 Ship::Ship(Game* game) : Actor(game) , mLaserCooldown(0.0f)
 {
 	Init();
@@ -30,7 +32,7 @@ Ship::Ship(Game* game) : Actor(game) , mLaserCooldown(0.0f)
 	mAnimComponent = asc;
 
 
-	//InputComponent作成.MoveComponentの子
+	//InputComponent作成
 	InputComponent* ic = new InputComponent(this);
 	ic->SetForwardKey(SDL_SCANCODE_UP);
 	ic->SetBackwardKey(SDL_SCANCODE_DOWN);
@@ -48,11 +50,12 @@ Ship::Ship(Game* game) : Actor(game) , mLaserCooldown(0.0f)
 
 void Ship::Init()
 {
-	SetPosition(Vector2(GetGame()->mWindowWidth / 2.0f, GetGame()->mWindowHeight / 2.0f));
+	
+	SetPosition(Vector2(0.0f, 0.0f));
 	//ランダムな向きで初期化
-	//float rot = Random::GetFloatRange(0.0f, Math::TwoPi);
-	//SetRotation(rot);
-	SetScale(0.7f);
+	float rot = Random::GetFloatRange(0.0f, Math::TwoPi);
+	SetRotation(rot);
+	SetScale(1.0f);
 	SetMass(1.0f);
 
 	crash = false;
@@ -94,9 +97,9 @@ void Ship::ActorInput(const uint8_t* keyState)
 		{
 			// レーザーオブジェクトを作成、位置と回転角を宇宙船とあわせる。
 			Laser* laser = new Laser(GetGame());
-			laser->SetPosition(GetPosition() + 35.0f * GetScale() * Vector2(Math::Cos(GetRotation()), -Math::Sin(GetRotation())));
+			laser->SetPosition(GetPosition() + 35.0f * GetScale() * Vector2(Math::Cos(GetRotation()), Math::Sin(GetRotation())));
 			laser->SetRotation(GetRotation());
-			laser->SetVelocity(1000.0f * Vector2(Math::Cos(GetRotation()),-Math::Sin(GetRotation())));
+			laser->SetVelocity(10.0f * Vector2(Math::Cos(GetRotation()), Math::Sin(GetRotation())));
 
 			// レーザー冷却期間リセット
 			mLaserCooldown = 0.5f;
@@ -110,15 +113,15 @@ void Ship::UpdateActor(float deltaTime)
 	if (crash == false)
 	{
 		//画面外にでたら反対の位置に移動（ラッピング処理）
-		if (GetPosition().x < 0.0f - 1 * GetRadius() ||
-			GetPosition().x > GetGame()->mWindowWidth + 1 * GetRadius())
+		if (GetPosition().x < GetGame()->mWindowWidth * (-0.5f) - 1.0f * GetRadius() ||
+			GetPosition().x > GetGame()->mWindowWidth * 0.5f + 1.0f * GetRadius())
 		{
-			SetPosition(Vector2(GetGame()->mWindowWidth - GetPosition().x, GetPosition().y));
+			SetPosition(Vector2(-1.0f * GetPosition().x, GetPosition().y));
 		}
-		if (GetPosition().y < 0.0f - 1 * GetRadius() ||
-			GetPosition().y > GetGame()->mWindowHeight + 1 * GetRadius())
+		if (GetPosition().y < GetGame()->mWindowHeight * (-0.5f) - 1 * GetRadius() ||
+			GetPosition().y > GetGame()->mWindowHeight * 0.5f + 1 * GetRadius())
 		{
-			SetPosition(Vector2(GetPosition().x, GetGame()->mWindowHeight - GetPosition().y));
+			SetPosition(Vector2(GetPosition().x, -1.0f * GetPosition().y));
 		}
 
 		mLaserCooldown -= deltaTime;	//レーザーを次に撃てるまでの時間

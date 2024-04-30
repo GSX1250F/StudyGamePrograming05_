@@ -59,7 +59,7 @@ public:
 	const Matrix4& GetWorldTransform() const { return mWorldTransform; }
 
 	// 向きの単位ベクトル
-	Vector2 GetForward() const { return Vector2(Math::Cos(mRotation), -Math::Sin(mRotation)); }		//向きの単位ベクトル
+	Vector2 GetForward() const { return Vector2(Math::Cos(mRotation), Math::Sin(mRotation)); }		//向きの単位ベクトル
 
 	// 状態
 	State GetState() const { return mState; }
