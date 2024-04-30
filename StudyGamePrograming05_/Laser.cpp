@@ -1,9 +1,9 @@
 #include "Laser.h"
 #include "SpriteComponent.h"
-#include "MoveComponent.h"	
 #include "Game.h"
 #include "Asteroid.h"
 #include "CircleComponent.h"
+#include "Texture.h"
 
 Laser::Laser(Game* game) : Actor(game),mDeathTime(2.0f)
 {

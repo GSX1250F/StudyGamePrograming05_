@@ -15,6 +15,5 @@ protected:
 private:
 	float mDeathTime;
 	class CircleComponent* mCircle;		//衝突チェックのためのアクセスポインタ。他のオブジェクトから参照するため。
-
 };
 
