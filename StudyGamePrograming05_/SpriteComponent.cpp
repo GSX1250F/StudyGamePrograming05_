@@ -43,7 +43,7 @@ void SpriteComponent::Draw(SDL_Renderer* renderer)
 
 void SpriteComponent::Draw(Shader* shader)
 {
-	if (mTexture)
+	if (mTexture && mOwner->GetState() != mOwner->EPaused)	// EPausedのときはDrawしないように修正
 	{
 		// テクスチャの幅と高さで短径をスケーリング
 		Matrix4 scaleMat = Matrix4::CreateScale(
@@ -74,4 +74,5 @@ void SpriteComponent::SetTexture(Texture* texture)
 	// Set width/height
 	mTexWidth = texture->GetWidth();
 	mTexHeight = texture->GetHeight();
+	mOwner->SetRadius((mTexWidth + mTexHeight) / 4);
 }

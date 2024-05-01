@@ -16,6 +16,7 @@ protected:
 
 private:
 	float mRadius;
+	Vector2 mCenter;
 
 };
 

@@ -23,11 +23,18 @@ bool Intersect(const CircleComponent& a, const CircleComponent& b)
 {
 	// ‚Q‚Â‚ÌCircleComponent‚Ì’†SŠÔ‹——£‚ğŒvZ
 	Vector2 diff = a.GetCenter() - b.GetCenter();
-	float distSq = diff.LengthSq();
+	float dist = diff.Length();
 
-	// ‚Q‚Â‚ÌCircleComponent‚Ì”¼Œa‚Ì˜a‚Ì‚Qæ‚ğŒvZ 
-	float radiiSq = a.GetRadius() + b.GetRadius();
-	radiiSq *= radiiSq;
+	// ‚Q‚Â‚ÌCircleComponent‚Ì”¼Œa‚Ì˜a‚ğŒvZ 
+	float sumRadius = a.GetRadius() + b.GetRadius();
 
-	return distSq <= radiiSq;
+	// ’†SŠÔ‹——£ <= ”¼Œa‚Ì˜a ‚Ì‚Æ‚«AÕ“Ë‚µ‚½‚Æ”»’è
+	if (dist <= sumRadius)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }

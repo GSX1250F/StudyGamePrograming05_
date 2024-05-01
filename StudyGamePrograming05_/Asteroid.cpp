@@ -9,10 +9,10 @@ Asteroid::Asteroid(Game* game) : Actor(game)
 {
 	//ランダムな位置と向きと大きさと初速で初期化
 	Vector2 randPos;
-	randPos.x = GetGame()->mWindowWidth / 2.0f ; randPos.y = GetGame()->mWindowHeight / 2.0f;
-	while (randPos.x > GetGame()->mWindowWidth * 0.25f && randPos.x < GetGame()->mWindowHeight *0.75f && randPos.y > 768.0f * 0.25f && randPos.y < 768.0f * 0.75f)
+	randPos.x = 0.0f;	randPos.y = 0.0f;
+	while (randPos.x > GetGame()->mWindowWidth * (-0.25f) && randPos.x < GetGame()->mWindowWidth *0.25f && randPos.y > GetGame()->mWindowHeight * (-0.25f) && randPos.y < GetGame()->mWindowHeight * 0.25f)
 	{
-		randPos = Random::GetVector(Vector2::Zero, Vector2(GetGame()->mWindowWidth*1.0f, GetGame()->mWindowHeight*1.0f));
+		randPos = Random::GetVector(Vector2(GetGame()->mWindowWidth * (-0.5f), GetGame()->mWindowHeight * (-0.5f)), Vector2(GetGame()->mWindowWidth*0.5f, GetGame()->mWindowHeight*0.5f));
 	}
 	SetPosition(randPos);
 	float randRot = Random::GetFloatRange(0.0f, Math::TwoPi);
@@ -22,7 +22,7 @@ Asteroid::Asteroid(Game* game) : Actor(game)
 	float mSpinSpeed = Random::GetFloatRange(-1.0f * Math::TwoPi, 1.0f * Math::TwoPi);
 	SetRotSpeed(mSpinSpeed);
 	float randSpeed = Random::GetFloatRange(50.0f, 200.0f);
-	Vector2 randVel = Vector2(Math::Cos(randRot), -Math::Sin(randRot)) * randSpeed;		//初期速度
+	Vector2 randVel = Vector2(Math::Cos(randRot), Math::Sin(randRot)) * randSpeed;		//初期速度
 	SetVelocity(randVel);
 
 
@@ -48,15 +48,15 @@ Asteroid::~Asteroid()
 void Asteroid::UpdateActor(float deltaTime)
 {
 	//画面外にでたら反対の位置に移動（ラッピング処理）
-	if (GetPosition().x < 0.0f - 2 * GetRadius() ||
-		GetPosition().x > GetGame()->mWindowWidth + 2 * GetRadius() )
+	if (GetPosition().x < GetGame()->mWindowWidth * (-0.5f) - 2 * GetRadius() ||
+		GetPosition().x > GetGame()->mWindowWidth * 0.5f + 2 * GetRadius() )
 	{
-		SetPosition(Vector2(GetGame()->mWindowWidth - GetPosition().x , GetPosition().y));
+		SetPosition(Vector2(-1.0f * GetPosition().x , GetPosition().y));
 	}
-	if (GetPosition().y < 0.0f - 2 * GetRadius() ||
-		GetPosition().y > GetGame()->mWindowHeight + 2 * GetRadius())
+	if (GetPosition().y < GetGame()->mWindowHeight * (-0.5f) - 2 * GetRadius() ||
+		GetPosition().y > GetGame()->mWindowHeight * 0.5f + 2 * GetRadius())
 	{
-		SetPosition(Vector2(GetPosition().x , GetGame()->mWindowHeight - GetPosition().y));
+		SetPosition(Vector2(GetPosition().x , -1.0f * GetPosition().y));
 	}
 }
 
