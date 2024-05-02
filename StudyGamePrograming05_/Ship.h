@@ -11,21 +11,16 @@ public:
 
 	void Init();
 
-	class CircleComponent* GetCircle() { return mCircle; }
-
-
-protected:
-
-
 private:
 	float mLaserCooldown;
-	class CircleComponent* mCircle;		//衝突チェックのためのアクセスポインタ。他のオブジェクトから参照するため。
 	Vector2 crashPos;		//衝突したときの位置
 	float crashRot;			//衝突したときの向き
 	bool crash;				//衝突検知
-	float crashTime;		//衝突演出時間
-	float deactiveTime;		//衝突演出後、リセットされるまでスプライトを消す時間
+	float mCrashCooldown;		//衝突演出時間
+	float mShipCooldown;		//衝突演出後、リセットされるまでスプライトを消す時間
 
+	class InputComponent* mInput;
+	class CircleComponent* mCircle;
 	class AnimSpriteComponent* mAnimComponent;
 
 };

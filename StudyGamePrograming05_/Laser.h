@@ -8,9 +8,7 @@ public:
 
 	void UpdateActor(float deltaTime) override;
 
-	class CircleComponent* GetCircle() { return mCircle; }
-
-protected:
+	void Shot();
 
 private:
 	float mDeathTime;

@@ -32,7 +32,7 @@ Actor::~Actor()
 
 void Actor::Update(float deltaTime)
 {
-	if (mState != EDead)	// EPausedのときも更新するよう修正。
+	if (mState == EActive || mState == EPaused)	// EPausedのときも更新するよう修正。
 	{
 		// ワールド変換
 		ComputeWorldTransform();

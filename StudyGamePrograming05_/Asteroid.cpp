@@ -31,12 +31,12 @@ Asteroid::Asteroid(Game* game) : Actor(game)
 	sc->SetTexture(game->GetTexture("Assets/Asteroid.png"));
 
 	//MoveComponent作成　※力は働かないでただ動かすだけなら不要。
-	MoveComponent* mc = new MoveComponent(this);
+	//MoveComponent* mc = new MoveComponent(this);
 
 	//CircleComponent作成
 	mCircle = new CircleComponent(this);
 
-	// Add to mAsteroids in game
+	//小惑星をゲームに追加
 	game->AddAsteroid(this);
 }
 

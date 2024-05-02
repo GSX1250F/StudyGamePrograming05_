@@ -5,9 +5,8 @@
 #include "CircleComponent.h"
 #include "Texture.h"
 
-Laser::Laser(Game* game) : Actor(game),mDeathTime(2.0f)
+Laser::Laser(Game* game) : Actor(game),mDeathTime(1.0f)
 {
-
 	//スプライトコンポーネント作成、テクスチャ設定
 	SpriteComponent* sc = new SpriteComponent(this);
 	sc->SetTexture(game->GetTexture("Assets/Laser.png"));
@@ -37,8 +36,7 @@ void Laser::UpdateActor(float deltaTime)
 				SetState(EDead);
 
 				//小惑星を消去
-				ast->SetState(EPaused);
-
+				ast->SetState(EDead);
 				break;
 			}
 		}
@@ -46,5 +44,10 @@ void Laser::UpdateActor(float deltaTime)
 
 
 
+}
+
+void Laser::Shot()
+{
+	SetVelocity(900.0f * Vector2(Math::Cos(GetRotation()), Math::Sin(GetRotation())));
 }
 
