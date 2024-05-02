@@ -6,9 +6,9 @@
 #include <algorithm>
 #include "Actor.h"
 #include "SpriteComponent.h"
-#include "BGSpriteComponent.h"
 #include "Ship.h"
 #include "Asteroid.h"
+#include "Farback.h"
 #include "Random.h"
 //#include <SDL.h>
 //#include <SDL_image.h>
@@ -249,6 +249,13 @@ void Game::LoadData()
 	{
 		new Asteroid(this);
 	}
+
+	//”wŒi‚ğì¬
+	const int numFarbacks = 2;
+	for (int i = 0; i < numFarbacks; i++)
+	{
+		new Farback(this,i);
+	}
 }
 
 void Game::UnloadData()
@@ -338,6 +345,11 @@ void Game::RemoveAsteroid(Asteroid* ast)
 	{
 		mAsteroids.erase(iter);
 	}
+}
+
+void Game::AddFarback(Farback* farback)
+{
+	mFarbacks.emplace_back(farback);
 }
 
 void Game::Shutdown()

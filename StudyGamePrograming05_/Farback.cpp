@@ -1,38 +1,28 @@
 #include "Farback.h"
 #include "Game.h"
 #include "SpriteComponent.h"
-#include "Texture.h"
-#include "Actor.h"
 
-
-Farback::Farback(Game* game) : Actor(game),scrollspeed(-10.0f)
+Farback::Farback(Game* game , int id) : Actor(game),scrollspeed(-10.0f),offset_x(0.0f),offset_y(0.0f)
 {
-	// １つめの背景
-	Actor* bg1 = new Actor(game);
-	SpriteComponent* sc1 = new SpriteComponent(bg1 , 10);
-	sc1->SetTexture(game->GetTexture("Assets/Farback01.png"));
-	Farbacks.emplace_back(bg1);
-	offset = sc1->GetTexWidth();
-
-	// ２つめの背景
-	Actor* bg2 = new Actor(game);
-	SpriteComponent* sc2 = new SpriteComponent(bg2, 10);
-	sc2->SetTexture(game->GetTexture("Assets/Farback02.png"));
-	Farbacks.emplace_back(bg2);
-
-	for (int i = 0; i < Farbacks.size(); i++)
-	{
-		Farbacks[i].SetPosition(Vector2(0.0f + i * offset , 0.0f));
-		Farbacks[i].SetVelocity(Vector2(-scrollspeed, 0.0f));
-	}
-
+	BGfiles.emplace_back("Assets/Farback01.png");
+	BGfiles.emplace_back("Assets/Farback02.png");
+	
+	//スプライトコンポーネント作成、テクスチャ設定
+	SpriteComponent* sc = new SpriteComponent(this);
+	sc->SetTexture(game->GetTexture(BGfiles[id]));
 }
 
 void Farback::UpdateActor(float deltaTime)
 {
 	// 背景のラッピング処理
-	for (auto i:Farbacks)
+	if(GetPosition().x < offset_x * (-0.5f) ||
+	   GetPosition().x > offset_x * 0.5f)
 	{
-
+		 SetPosition(Vector2(-GetPosition().x, GetPosition().y));
+	}
+	if (GetPosition().y < offset_y * (-0.5f) ||
+		GetPosition().y > offset_y * 0.5f)
+	{
+		 SetPosition(Vector2(GetPosition().x, -GetPosition().y));
 	}
 }

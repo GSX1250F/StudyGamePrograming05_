@@ -27,6 +27,7 @@ public:
 	void AddAsteroid(class Asteroid* ast);
 	void RemoveAsteroid(class Asteroid* ast);
 	std::vector<class Asteroid*>& GetAsteroids() { return mAsteroids; }
+	void AddFarback(class Farback* farback);
 
 	//ゲームウィンドウの大きさ
 	int mWindowWidth;
@@ -70,4 +71,5 @@ private:
 	//Game-specific
 	class Ship* mShip; // player ship
 	std::vector<class Asteroid*> mAsteroids; //asteroids
+	std::vector<class Farback*> mFarbacks;  //背景
 };
