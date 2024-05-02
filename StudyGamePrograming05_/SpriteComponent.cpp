@@ -74,5 +74,6 @@ void SpriteComponent::SetTexture(Texture* texture)
 	// Set width/height
 	mTexWidth = texture->GetWidth();
 	mTexHeight = texture->GetHeight();
-	mOwner->SetRadius((mTexWidth + mTexHeight) / 4);
+	// Actor‚Ì”¼Œa‚ðAwidth‚Æheight‚Ì•½‹Ï/2‚É‚·‚éB
+	mOwner->SetRadius((mTexWidth + mTexHeight) * 0.25f);
 }

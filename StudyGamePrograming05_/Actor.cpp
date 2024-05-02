@@ -12,7 +12,6 @@ Actor::Actor(Game* game)
 	mRotSpeed(0.0f),
 	mMass(1.0f),
 	mRadius(0.0f),
-	mImoment(0.0f),
 	mGame(game),
 	mRecomputeWorldTransform(true)
 {
@@ -79,6 +78,13 @@ void Actor::ProcessInput(const uint8_t* keyState)
 //機能追加するときオーバーライドするインプット用関数
 void Actor::ActorInput(const uint8_t* keyState)
 {
+}
+
+float Actor::GetImoment() const
+{
+	//Actorの慣性モーメントを設定。一様の円板とする。(I=1/2*mR^2)
+	float mImoment = 0.5f * GetMass() * GetRadius() * GetRadius();
+	return mImoment;
 }
 
 void Actor::ComputeWorldTransform()

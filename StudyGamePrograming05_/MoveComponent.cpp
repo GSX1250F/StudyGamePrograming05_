@@ -23,9 +23,9 @@ void MoveComponent::Update(float deltatime)
 	// Actorの重心速度と回転速度を更新
 	// Actorの位置と角度はActorのUpdateで更新
 	if (mOwner->GetMass() != 0) {
-		mMoveAccel = mMoveForce * (1 / mOwner->GetMass());	//重心加速度の計算　F=ma  a=F*(1/m)
+		mMoveAccel = mMoveForce * (1.0f / mOwner->GetMass());	//重心加速度の計算　F=ma  a=F*(1/m)
 		//抵抗力 = 速さ*抵抗係数    減速 = -速さ*抵抗係数/質量
-		Vector2 movedecel = mOwner->GetVelocity() * mMoveResist *0.01 * (1 / mOwner->GetMass());
+		Vector2 movedecel = mOwner->GetVelocity() * mMoveResist *0.01f * (1 / mOwner->GetMass());
 		mMoveAccel -= movedecel;
 	}
 	else { mMoveAccel = Vector2::Zero; }

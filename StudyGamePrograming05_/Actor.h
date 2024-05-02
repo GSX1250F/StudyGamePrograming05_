@@ -22,7 +22,6 @@ public:
 	void UpdateComponents(float deltaTime);
 	// アクター独自の更新処理(オーバーライド可能)
 	virtual void UpdateActor(float deltaTime);
-
 	// ゲームから呼び出されるProcess Input(オーバーライド不可)
 	void ProcessInput(const uint8_t* keyState);
 	// アクター独自の入力処理(オーバーライド可能)
@@ -35,7 +34,7 @@ public:
 	// 速度
 	const Vector2& GetVelocity() const { return mVelocity; }
 	void SetVelocity(const Vector2& vel) { mVelocity = vel; mRecomputeWorldTransform = true;	}
-	// 拡大率
+	// 拡大率（質量は変えない。半径に影響する）
 	float GetScale() const { return mScale; }
 	void SetScale(float scale) { mScale = scale; mRecomputeWorldTransform = true;}
 	// 回転
@@ -51,8 +50,7 @@ public:
 	float GetMass() const { return mMass; }
 	void SetMass(float mass) { mMass = mass; mRecomputeWorldTransform = true;}
 	// 慣性モーメント
-	float GetImoment() const { return mImoment; }		
-	void SetImoment(float moment) { mImoment = moment; mRecomputeWorldTransform = true;}
+	float GetImoment() const;
 
 	// ワールド変換
 	void ComputeWorldTransform();
@@ -84,7 +82,6 @@ private:
 	float mRotSpeed;		//回転速度
 	float mMass;			//質量
 	float mRadius;			//半径（拡大率は無視）
-	float mImoment;			//慣性モーメント
 	
 	// 変換
 	Matrix4 mWorldTransform;
