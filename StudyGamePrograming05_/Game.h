@@ -27,8 +27,8 @@ public:
 	void AddAsteroid(class Asteroid* ast);
 	void RemoveAsteroid(class Asteroid* ast);
 	std::vector<class Asteroid*>& GetAsteroids() { return mAsteroids; }
-	void AddFarback(class Farback* farback);
-
+	void AddBackGround(class BackGround* bg);
+	
 	//ƒQ[ƒ€ƒEƒBƒ“ƒhƒE‚Ì‘å‚«‚³
 	int mWindowWidth;
 	int mWindowHeight;
@@ -71,5 +71,5 @@ private:
 	//Game-specific
 	class Ship* mShip; // player ship
 	std::vector<class Asteroid*> mAsteroids; //asteroids
-	std::vector<class Farback*> mFarbacks;  //”wŒi
+	std::vector<class BackGround*> mBackGrounds;  //”wŒi
 };

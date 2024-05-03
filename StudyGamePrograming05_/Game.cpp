@@ -8,7 +8,7 @@
 #include "SpriteComponent.h"
 #include "Ship.h"
 #include "Asteroid.h"
-#include "Farback.h"
+#include "BackGround.h"
 #include "Random.h"
 //#include <SDL.h>
 //#include <SDL_image.h>
@@ -243,6 +243,7 @@ void Game::LoadData()
 {
 	//ƒvƒŒƒCƒ„[‚Ì‰F’ˆ‘D‚ğì¬
 	mShip = new Ship(this);
+
 	// ¬˜f¯‚ğ•¡”¶¬
 	const int numAsteroids = 20;
 	for (int i = 0; i < numAsteroids; i++)
@@ -251,11 +252,10 @@ void Game::LoadData()
 	}
 
 	//”wŒi‚ğì¬
-	const int numFarbacks = 2;
-	for (int i = 0; i < numFarbacks; i++)
-	{
-		new Farback(this,i);
-	}
+	new BackGround(this, 0, -10.0f, 5,"Assets/Farback01.png");
+	new BackGround(this, 1, -10.0f, 5, "Assets/Farback02.png");
+	new BackGround(this, 0, -20.0f, 15, "Assets/Stars.png");
+	new BackGround(this, 1, -20.0f, 15, "Assets/Stars.png");
 }
 
 void Game::UnloadData()
@@ -347,10 +347,11 @@ void Game::RemoveAsteroid(Asteroid* ast)
 	}
 }
 
-void Game::AddFarback(Farback* farback)
+void Game::AddBackGround(BackGround* bg)
 {
-	mFarbacks.emplace_back(farback);
+	mBackGrounds.emplace_back(bg);
 }
+
 
 void Game::Shutdown()
 {
