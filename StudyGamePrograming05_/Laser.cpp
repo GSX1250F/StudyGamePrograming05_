@@ -4,14 +4,18 @@
 #include "Asteroid.h"
 #include "CircleComponent.h"
 #include "Texture.h"
+#include "MoveComponent.h"
 
-Laser::Laser(Game* game) : Actor(game),mDeathTime(1.0f)
+Laser::Laser(Game* game) : Actor(game),mDeathTime(1.0f),mLaserSpeed(900.0f)
 {
+	//初期位置,角度はShipで設定
 	//スプライトコンポーネント作成、テクスチャ設定
 	SpriteComponent* sc = new SpriteComponent(this);
 	sc->SetTexture(game->GetTexture("Assets/Laser.png"));
 	
-	//初期位置,速度,角度はShipで設定
+	//MoveComponent作成
+	MoveComponent* mc = new MoveComponent(this);
+	mc->SetVelocity(mLaserSpeed * Vector2(Math::Cos(GetRotation()), Math::Sin(GetRotation())));
 
 	//CircleComponent作成
 	mCircle = new CircleComponent(this);
@@ -45,9 +49,3 @@ void Laser::UpdateActor(float deltaTime)
 
 
 }
-
-void Laser::Shot()
-{
-	SetVelocity(900.0f * Vector2(Math::Cos(GetRotation()), Math::Sin(GetRotation())));
-}
-

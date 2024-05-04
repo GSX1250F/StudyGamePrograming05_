@@ -31,9 +31,6 @@ public:
 	// 位置
 	const Vector2& GetPosition() const { return mPosition; }
 	void SetPosition(const Vector2& pos) { mPosition = pos; mRecomputeWorldTransform = true;}
-	// 速度
-	const Vector2& GetVelocity() const { return mVelocity; }
-	void SetVelocity(const Vector2& vel) { mVelocity = vel; mRecomputeWorldTransform = true;	}
 	// 拡大率（質量は変えない。半径に影響する）
 	const float& GetScale() const { return mScale; }
 	void SetScale(const float& scale) { mScale = scale; mRecomputeWorldTransform = true;}
@@ -43,21 +40,14 @@ public:
 	// 半径
 	const float& GetRadius() const { return mRadius * mScale; }	//拡大率を考慮
 	void SetRadius(const float& radius) { mRadius = radius; mRecomputeWorldTransform = true;}
-	// 回転速度
-	const float& GetRotSpeed() const { return mRotSpeed; }
-	void SetRotSpeed(const float& rotspeed) { mRotSpeed = rotspeed; mRecomputeWorldTransform = true;}
-	// 質量
-	const float& GetMass() const { return mMass; }
-	void SetMass(const float& mass) { mMass = mass; mRecomputeWorldTransform = true;}
-	// 慣性モーメント
-	float GetImoment();
+	
 
 	// ワールド変換
 	void ComputeWorldTransform();
 	const Matrix4& GetWorldTransform() const { return mWorldTransform; }
 
 	// 向きの単位ベクトル
-	Vector2 GetForward() const { return Vector2(Math::Cos(mRotation), Math::Sin(mRotation)); }		//向きの単位ベクトル
+	Vector2 GetForward() const { return Vector2(Math::Cos(mRotation), Math::Sin(mRotation)); }
 
 	// 状態
 	State GetState() const { return mState; }
@@ -76,11 +66,8 @@ private:
 
 	// 移動
 	Vector2 mPosition;		//画面上の位置
-	Vector2 mVelocity;		//速度x,y
 	float mScale;			//拡大率
 	float mRotation;		//回転
-	float mRotSpeed;		//回転速度
-	float mMass;			//質量
 	float mRadius;			//半径（拡大率は無視）
 	
 	// 変換

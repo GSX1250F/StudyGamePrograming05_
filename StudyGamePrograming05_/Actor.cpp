@@ -6,11 +6,8 @@
 Actor::Actor(Game* game)
 	:mState(EActive),
 	mPosition(Vector2::Zero),
-	mVelocity(Vector2::Zero),
 	mScale(1.0f),
 	mRotation(0.0f),
-	mRotSpeed(0.0f),
-	mMass(1.0f),
 	mRadius(0.0f),
 	mGame(game),
 	mRecomputeWorldTransform(true)
@@ -36,10 +33,6 @@ void Actor::Update(float deltaTime)
 		// ワールド変換
 		ComputeWorldTransform();
 
-		// 位置情報を更新
- 		SetPosition(GetPosition() + mVelocity * deltaTime);
-		SetRotation(GetRotation() + mRotSpeed * deltaTime);
-		
 		UpdateComponents(deltaTime);
 		UpdateActor(deltaTime);
 
@@ -80,13 +73,6 @@ void Actor::ActorInput(const uint8_t* keyState)
 {
 }
 
-float Actor::GetImoment()
-{
-	//Actorの慣性モーメントを設定。一様の円板とする。(I=1/2*mR^2)
-	float mImoment = 0.5f * GetMass() * GetRadius() * GetRadius();
-	return mImoment;
-}
-
 void Actor::ComputeWorldTransform()
 {
 	if (mRecomputeWorldTransform)
@@ -104,7 +90,6 @@ void Actor::ComputeWorldTransform()
 		}
 	}
 }
-
 
 void Actor::AddComponent(Component* component)
 {

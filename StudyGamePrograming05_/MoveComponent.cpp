@@ -4,12 +4,17 @@
 
 MoveComponent::MoveComponent(Actor* owner, int updateOrder) 
 	: Component(owner), 
-	mMoveForce(Vector2::Zero),
-	mMoveAccel(Vector2::Zero),
-	mRotForce(0.0f),
-	mRotAccel(0.0f),
-	mMoveResist(0.0f),
-	mRotResist(0.0f)
+	mVelocity(Vector2::Zero),		// 重心移動速度
+	mRotSpeed(0.0f),				// 回転速度
+	mMass(1.0f),					// 質量
+	mMoveForce(Vector2::Zero),		// 重心にかかる力
+	mMoveAccel(Vector2::Zero),		// 重心加速度	=重心にかかる力 / 質量
+	mRotForce(0.0f),				// 回転方向の力F +方向はCCW
+	mRotAccel(0.0f),				// 回転加速度
+	mMoveResist(0.0f),				// 重心速度抵抗率(%)
+	mRotResist(0.0f),				// 回転速度抵抗率(%)
+	mTorque(0.0f),					// トルク=回転方向の力 * 半径 = 慣性モーメント * 回転加速度
+	mImoment(0.0f)					// 慣性モーメント
 {
 	
 }
@@ -20,22 +25,38 @@ MoveComponent::~MoveComponent()
 
 void MoveComponent::Update(float deltatime)
 {
-	// Actorの重心速度と回転速度を更新
-	// Actorの位置と角度はActorのUpdateで更新
-	if (mOwner->GetMass() != 0) {
-		mMoveAccel = mMoveForce * (1.0f / mOwner->GetMass());	//重心加速度の計算　F=ma  a=F*(1/m)
+	// Actorの位置を更新
+	mOwner->SetPosition(mOwner->GetPosition() + mVelocity * deltatime);		//x = xo + vt
+	// Actorの方向を更新
+	mOwner->SetRotation(mOwner->GetRotation() + mRotSpeed * deltatime);		//Θ = Θo + ωt
+
+	// 重心速度を更新
+	if (!Math::NearZero(mMass)) 
+	{
+		//重心加速度の計算　F=ma  a=F*(1/m)
+		mMoveAccel = mMoveForce * (1.0f / mMass);		
 		//抵抗力 = 速さ*抵抗係数    減速 = -速さ*抵抗係数/質量
-		Vector2 movedecel = mOwner->GetVelocity() * mMoveResist *0.01f * (1 / mOwner->GetMass());
+		Vector2 movedecel = mVelocity * mMoveResist * 0.01f * (1 / mMass);
 		mMoveAccel -= movedecel;
 	}
 	else { mMoveAccel = Vector2::Zero; }
-	if (mOwner->GetImoment() != 0 && mOwner->GetRadius() != 0) {
-		mRotAccel = mRotForce * mOwner->GetRadius() / mOwner->GetImoment();	//回転加速度の計算 Fr=Ia  a=Fr/I
+	mVelocity += mMoveAccel * deltatime;
+
+	// 方向を更新
+	// 慣性モーメント計算	 ※2次元においては、一様密度の円板とする。 I=0.5*質量*半径^2
+	mImoment = 0.5f * mMass * mOwner->GetRadius() * mOwner->GetRadius();
+	if (!Math::NearZero(mImoment)) 
+	{
+		// トルク計算　　トルク=回転方向の力 * 半径
+		mTorque = mRotForce * mOwner->GetRadius();
+		// 回転加速度の計算　回転加速度 = トルク / 慣性モーメント
+		mRotAccel = mTorque / mImoment;		//回転加速度の計算 Fr=Ia  a=Fr/I
 		//抵抗力 = 速さ*抵抗係数    減速 = -速さ*抵抗係数*半径/慣性モーメント
-		float rotdecel = mOwner->GetRotSpeed() * mOwner->GetRadius() * mRotResist / mOwner->GetImoment();
+		float rotdecel = mRotSpeed * mOwner->GetRadius() * mRotResist / mImoment;
 		mRotAccel -= rotdecel;
 	}
-	else { mRotAccel = 0; }
-	mOwner->SetVelocity(mOwner->GetVelocity() + mMoveAccel * deltatime);	//v = vo + at
-	mOwner->SetRotSpeed(mOwner->GetRotSpeed() + mRotAccel * deltatime);		//ω = ωo + ωt
+	else { mRotAccel = 0.0f; }
+	mVelocity += mMoveAccel * deltatime;	//v = vo + at
+	mRotSpeed += mRotAccel * deltatime;		//ω = ωo + bt
+
 }

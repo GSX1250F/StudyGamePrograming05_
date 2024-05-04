@@ -20,18 +20,18 @@ Asteroid::Asteroid(Game* game) : Actor(game)
 	float randScale = Random::GetFloatRange(0.5f, 1.5f);
 	SetScale(randScale);
 	float mSpinSpeed = Random::GetFloatRange(-1.0f * Math::TwoPi, 1.0f * Math::TwoPi);
-	SetRotSpeed(mSpinSpeed);
 	float randSpeed = Random::GetFloatRange(50.0f, 200.0f);
 	Vector2 randVel = Vector2(Math::Cos(randRot), Math::Sin(randRot)) * randSpeed;		//初期速度
-	SetVelocity(randVel);
-
+	
 
 	//スプライトコンポーネント作成、テクスチャ設定
 	SpriteComponent* sc = new SpriteComponent(this);
 	sc->SetTexture(game->GetTexture("Assets/Asteroid.png"));
 
-	//MoveComponent作成　※力は働かないでただ動かすだけなら不要。
-	//MoveComponent* mc = new MoveComponent(this);
+	//MoveComponent作成
+	MoveComponent* mc = new MoveComponent(this);
+	mc->SetVelocity(randVel);
+	mc->SetRotSpeed(mSpinSpeed);
 
 	//CircleComponent作成
 	mCircle = new CircleComponent(this);

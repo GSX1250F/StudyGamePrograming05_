@@ -18,8 +18,7 @@ Ship::Ship(Game* game)
 	  crashPos(Vector2(0.0f,0.0f)),
 	  crash(false)
 {
-	SetScale(1.0f);
-	SetMass(1.0f);
+	SetScale(0.8f);
 	/*
 	//スプライトコンポーネント作成、テクスチャ設定
 	SpriteComponent* sc = new SpriteComponent(this);
@@ -49,6 +48,8 @@ Ship::Ship(Game* game)
 	mInput->SetMaxRotForce(150.0f);
 	mInput->SetMoveResist(30.0f);
 	mInput->SetRotResist(30.0f);
+	mInput->SetMass(1.0f);
+
 
 	//CircleComponent作成
 	mCircle = new CircleComponent(this);
@@ -59,11 +60,12 @@ Ship::Ship(Game* game)
 void Ship::Init()
 {
 	SetPosition(Vector2(0.0f, 0.0f));
-	SetVelocity(Vector2(0.0f, 0.0f));
 	//ランダムな向きで初期化
 	float rot = Random::GetFloatRange(0.0f, Math::TwoPi);
 	SetRotation(rot);
-	
+	mInput->SetVelocity(Vector2(0.0f, 0.0f));
+	mInput->SetRotSpeed(0.0f);
+
 }
 
 void Ship::ActorInput(const uint8_t* keyState)
@@ -99,7 +101,6 @@ void Ship::ActorInput(const uint8_t* keyState)
 			Laser* laser = new Laser(GetGame());
 			laser->SetPosition(GetPosition() + 35.0f * GetScale() * Vector2(Math::Cos(GetRotation()), Math::Sin(GetRotation())));
 			laser->SetRotation(GetRotation());
-			laser->Shot();
 			// レーザー冷却期間リセット
 			mLaserCooldown = 0.5f;
 		}
