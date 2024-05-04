@@ -35,22 +35,22 @@ public:
 	const Vector2& GetVelocity() const { return mVelocity; }
 	void SetVelocity(const Vector2& vel) { mVelocity = vel; mRecomputeWorldTransform = true;	}
 	// Šg‘å—¦i¿—Ê‚Í•Ï‚¦‚È‚¢B”¼Œa‚É‰e‹¿‚·‚éj
-	float GetScale() const { return mScale; }
-	void SetScale(float scale) { mScale = scale; mRecomputeWorldTransform = true;}
+	const float& GetScale() const { return mScale; }
+	void SetScale(const float& scale) { mScale = scale; mRecomputeWorldTransform = true;}
 	// ‰ñ“]
-	float GetRotation() const { return mRotation; }
-	void SetRotation(float rotation) { mRotation = rotation; mRecomputeWorldTransform = true;}
+	const float& GetRotation() const { return mRotation; }
+	void SetRotation(const float& rotation) { mRotation = rotation; mRecomputeWorldTransform = true;}
 	// ”¼Œa
-	float GetRadius() const { return mRadius * mScale; }	//Šg‘å—¦‚ğl—¶
-	void SetRadius(float radius) { mRadius = radius; mRecomputeWorldTransform = true;}
+	const float& GetRadius() const { return mRadius * mScale; }	//Šg‘å—¦‚ğl—¶
+	void SetRadius(const float& radius) { mRadius = radius; mRecomputeWorldTransform = true;}
 	// ‰ñ“]‘¬“x
-	float GetRotSpeed() const { return mRotSpeed; }
-	void SetRotSpeed(float rotspeed) { mRotSpeed = rotspeed; mRecomputeWorldTransform = true;}
+	const float& GetRotSpeed() const { return mRotSpeed; }
+	void SetRotSpeed(const float& rotspeed) { mRotSpeed = rotspeed; mRecomputeWorldTransform = true;}
 	// ¿—Ê
-	float GetMass() const { return mMass; }
-	void SetMass(float mass) { mMass = mass; mRecomputeWorldTransform = true;}
+	const float& GetMass() const { return mMass; }
+	void SetMass(const float& mass) { mMass = mass; mRecomputeWorldTransform = true;}
 	// Šµ«ƒ‚[ƒƒ“ƒg
-	float GetImoment() const;
+	float GetImoment();
 
 	// ƒ[ƒ‹ƒh•ÏŠ·
 	void ComputeWorldTransform();

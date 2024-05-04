@@ -80,7 +80,7 @@ void Actor::ActorInput(const uint8_t* keyState)
 {
 }
 
-float Actor::GetImoment() const
+float Actor::GetImoment()
 {
 	//Actorの慣性モーメントを設定。一様の円板とする。(I=1/2*mR^2)
 	float mImoment = 0.5f * GetMass() * GetRadius() * GetRadius();
