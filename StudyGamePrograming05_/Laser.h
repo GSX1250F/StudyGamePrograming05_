@@ -7,7 +7,7 @@ public:
 	Laser(Game* game);
 
 	void UpdateActor(float deltaTime) override;
-
+	void Shot();
 private:
 	float mDeathTime;
 	float mLaserSpeed;

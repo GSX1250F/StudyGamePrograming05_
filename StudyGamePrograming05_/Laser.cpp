@@ -12,13 +12,6 @@ Laser::Laser(Game* game) : Actor(game),mDeathTime(1.0f),mLaserSpeed(900.0f)
 	//スプライトコンポーネント作成、テクスチャ設定
 	SpriteComponent* sc = new SpriteComponent(this);
 	sc->SetTexture(game->GetTexture("Assets/Laser.png"));
-	
-	//MoveComponent作成
-	MoveComponent* mc = new MoveComponent(this);
-	mc->SetVelocity(mLaserSpeed * Vector2(Math::Cos(GetRotation()), Math::Sin(GetRotation())));
-
-	//CircleComponent作成
-	mCircle = new CircleComponent(this);
 }
 
 void Laser::UpdateActor(float deltaTime)
@@ -48,4 +41,14 @@ void Laser::UpdateActor(float deltaTime)
 
 
 
+}
+
+void Laser::Shot()
+{
+	//MoveComponent作成
+	MoveComponent* mc = new MoveComponent(this);
+	mc->SetVelocity(mLaserSpeed * Vector2(Math::Cos(GetRotation()), Math::Sin(GetRotation())));
+
+	//CircleComponent作成
+	mCircle = new CircleComponent(this);
 }

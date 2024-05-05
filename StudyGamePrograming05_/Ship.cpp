@@ -60,9 +60,9 @@ Ship::Ship(Game* game)
 void Ship::Init()
 {
 	SetPosition(Vector2(0.0f, 0.0f));
-	//ランダムな向きで初期化
-	float rot = Random::GetFloatRange(0.0f, Math::TwoPi);
-	SetRotation(rot);
+	//float rot = Random::GetFloatRange(0.0f, Math::TwoPi);
+	//SetRotation(rot);
+	SetRotation(0.0f);
 	mInput->SetVelocity(Vector2(0.0f, 0.0f));
 	mInput->SetRotSpeed(0.0f);
 
@@ -101,6 +101,7 @@ void Ship::ActorInput(const uint8_t* keyState)
 			Laser* laser = new Laser(GetGame());
 			laser->SetPosition(GetPosition() + 35.0f * GetScale() * Vector2(Math::Cos(GetRotation()), Math::Sin(GetRotation())));
 			laser->SetRotation(GetRotation());
+			laser->Shot();
 			// レーザー冷却期間リセット
 			mLaserCooldown = 0.5f;
 		}
