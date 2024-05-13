@@ -29,6 +29,7 @@ public:
 	std::vector<class Asteroid*>& GetAsteroids() { return mAsteroids; }
 	void AddBackGround(class BackGround* bg);
 	
+	
 	//ゲームウィンドウの大きさ
 	int mWindowWidth;
 	int mWindowHeight;
@@ -72,4 +73,9 @@ private:
 	class Ship* mShip; // player ship
 	std::vector<class Asteroid*> mAsteroids; //asteroids
 	std::vector<class BackGround*> mBackGrounds;  //背景
+	float bgcolor;	//背景色　 3.0fで割った余りを各パラメータ、商を3.0fで割った余りでRGBを決める。
+	float bgRcolor;
+	float bgGcolor;
+	float bgBcolor;
+	void Update(float deltaTime);
 };

@@ -195,12 +195,20 @@ void Game::UpdateGame()
 	{
 		delete actor;
 	}
+
+	//GameSpecific
+	Update(deltaTime);
 }
 
 void Game::GenerateOutput()
 {
+	/*
 	//クリアカラーを灰色に設定
 	glClearColor(0.86f, 0.86f, 0.86f, 1.0f);
+	*/
+	//クリアカラーを設定
+	glClearColor(bgRcolor, bgGcolor, bgBcolor, 1.0f);
+
 	//カラーバッファをクリア
 	glClear(GL_COLOR_BUFFER_BIT);
 	
@@ -252,10 +260,14 @@ void Game::LoadData()
 	}
 
 	//背景を作成
+	/*
 	new BackGround(this, 0, -10.0f, 5,"Assets/Farback01.png");
 	new BackGround(this, 1, -10.0f, 5, "Assets/Farback02.png");
 	new BackGround(this, 0, -20.0f, 15, "Assets/Stars.png");
 	new BackGround(this, 1, -20.0f, 15, "Assets/Stars.png");
+	*/
+
+	bgcolor = 0.0f;
 }
 
 void Game::UnloadData()
@@ -425,4 +437,16 @@ void Game::RemoveSprite(SpriteComponent* sprite)
 	// (We can't swap because it ruins ordering)
 	auto iter = std::find(mSprites.begin(), mSprites.end(), sprite);
 	mSprites.erase(iter);
+}
+
+void Game::Update(float deltaTime)
+{
+	bgcolor += deltaTime / 5.0f;	//5秒毎にRGBそれぞれのパラメータが周期的に変わる
+	int rgb = static_cast<int>(fmod(bgcolor, 6.0f));
+	if (rgb == 0) { bgRcolor = fmod(bgcolor, 1.0f); }
+	if (rgb == 1) { bgRcolor = 1.0f - fmod(bgcolor, 1.0f); }
+	if (rgb == 2) { bgGcolor = fmod(bgcolor, 1.0f);	}
+	if (rgb == 3) { bgGcolor = 1.0f - fmod(bgcolor, 1.0f); }
+	if (rgb == 4) { bgBcolor = fmod(bgcolor, 1.0f); }
+	if (rgb == 5) { bgBcolor = 1.0f - fmod(bgcolor, 1.0f); }
 }
