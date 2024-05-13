@@ -219,7 +219,7 @@ void Game::GenerateOutput()
 		GL_SRC_ALPHA,				// srcFactorはsrcAlpha
 		GL_ONE_MINUS_SRC_ALPHA		// dstFactorは(1-srcAlpha)
 	);
-
+	
 	// スプライトのシェーダーと頂点配列オブジェクトをアクティブ化
 	mSpriteShader->SetActive();
 	mSpriteVerts->SetActive();
