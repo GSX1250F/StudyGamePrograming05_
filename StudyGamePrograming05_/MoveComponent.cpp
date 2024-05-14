@@ -40,8 +40,7 @@ void MoveComponent::Update(float deltatime)
 		mMoveAccel -= movedecel;
 	}
 	else { mMoveAccel = Vector2::Zero; }
-	mVelocity += mMoveAccel * deltatime;
-
+	
 	// 方向を更新
 	// 慣性モーメント計算	 ※2次元においては、一様密度の円板とする。 I=0.5*質量*半径^2
 	mImoment = 0.5f * mMass * mOwner->GetRadius() * mOwner->GetRadius();
