@@ -233,18 +233,6 @@ void Game::GenerateOutput()
 	//バッファを交換
 	SDL_GL_SwapWindow(mWindow);
 	
-	/*
-	SDL_SetRenderDrawColor(mRenderer, 220, 220, 220, 255);
-	SDL_RenderClear(mRenderer);
-
-	// すべてのスプライトコンポーネントを描画
-	for (auto sprite : mSprites)
-	{
-		sprite->Draw(mRenderer);
-	}
-
-	SDL_RenderPresent(mRenderer);
-	*/
 }
 
 void Game::LoadData()
@@ -260,13 +248,12 @@ void Game::LoadData()
 	}
 
 	//背景を作成
-	/*
+	
 	new BackGround(this, 0, -10.0f, 5,"Assets/Farback01.png");
 	new BackGround(this, 1, -10.0f, 5, "Assets/Farback02.png");
 	new BackGround(this, 0, -20.0f, 15, "Assets/Stars.png");
 	new BackGround(this, 1, -20.0f, 15, "Assets/Stars.png");
-	*/
-
+	
 	bgcolor = 0.0f;
 }
 
@@ -441,6 +428,7 @@ void Game::RemoveSprite(SpriteComponent* sprite)
 
 void Game::Update(float deltaTime)
 {
+	/*
 	bgcolor += deltaTime / 5.0f;	//5秒毎にRGBそれぞれのパラメータが周期的に変わる
 	int rgb = static_cast<int>(fmod(bgcolor, 6.0f));
 	if (rgb == 0) { bgRcolor = fmod(bgcolor, 1.0f); }
@@ -449,4 +437,5 @@ void Game::Update(float deltaTime)
 	if (rgb == 3) { bgGcolor = 1.0f - fmod(bgcolor, 1.0f); }
 	if (rgb == 4) { bgBcolor = fmod(bgcolor, 1.0f); }
 	if (rgb == 5) { bgBcolor = 1.0f - fmod(bgcolor, 1.0f); }
+	*/
 }
