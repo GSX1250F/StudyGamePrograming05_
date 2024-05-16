@@ -15,7 +15,7 @@ VertexArray::VertexArray(const float* verts, unsigned int numVerts,
 	glBindBuffer(GL_ARRAY_BUFFER, mVertexBuffer);
 	glBufferData(
 		GL_ARRAY_BUFFER,	// バッファの種類
-		numVerts * 5 * sizeof(float),	//コピーするバイト数
+		numVerts * 9 * sizeof(float),	//コピーするバイト数
 		verts,	//コピー元（ポインタ）
 		GL_STATIC_DRAW	//このデータの利用方法
 	);
@@ -36,7 +36,7 @@ VertexArray::VertexArray(const float* verts, unsigned int numVerts,
 		3,						// 要素数（ここでは3）
 		GL_FLOAT,				// 要素の型
 		GL_FALSE,				// 整数型のみ使用する。
-		sizeof(float) * 5,		// 新しいストライドはfloat5個分
+		sizeof(float) * 9,		// 新しいストライドはfloat5個分
 		0						// 頂点データの開始位置からこの属性までのオフセット
 	);
 	glEnableVertexAttribArray(1);
@@ -45,8 +45,17 @@ VertexArray::VertexArray(const float* verts, unsigned int numVerts,
 		2,						// 成分の数（uvは２個）
 		GL_FLOAT,				// 各成分の型
 		GL_FALSE,				// GL_FLOATには使わない
-		sizeof(float) * 5,		// ストライド（通常は各頂点のサイズ）
+		sizeof(float) * 9,		// ストライド（通常は各頂点のサイズ）
 		reinterpret_cast<void*>(sizeof(float) * 3)		// オフセットポインタ
+	);
+	glEnableVertexAttribArray(2);
+	glVertexAttribPointer(
+		2,						// 頂点属性インデックス
+		4,						// 成分の数
+		GL_FLOAT,				// 各成分の型
+		GL_FALSE,				// GL_FLOATには使わない
+		sizeof(float) * 9,		// ストライド（通常は各頂点のサイズ）
+		reinterpret_cast<void*>(sizeof(float) * 5)		// オフセットポインタ
 	);
 
 }

@@ -75,22 +75,6 @@ bool Game::Initialize()
 	//一部のプラットフォームでは、GLEWが無害なエラーコードを出すので、それをクリアする。
 	glGetError();
 
-	/*
-	// SDLレンダラーを作成
-	mRenderer = SDL_CreateRenderer(mWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-	if (!mRenderer)
-	{
-		SDL_Log("レンダラーの作成に失敗しました: %s", SDL_GetError());
-		return false;
-	}
-	// SDL_imageを初期化
-	if (IMG_Init(IMG_INIT_PNG) == 0)
-	{
-		SDL_Log("SDL_imageを初期化できません: %s", SDL_GetError());
-		return false;
-	}
-	*/
-
 	// シェーダーを作成およびコンパイル可能かを確認
 	if (!LoadShaders())
 	{
@@ -260,7 +244,6 @@ void Game::LoadData()
 void Game::UnloadData()
 {
 	// アクターを消去
-	// Because ~Actor calls RemoveActor, have to use a different style loop
 	while (!mActors.empty())
 	{
 		delete mActors.back();
@@ -269,7 +252,6 @@ void Game::UnloadData()
 	// テクスチャを消去
 	for (auto i : mTextures)
 	{
-		//SDL_DestroyTexture(i.second);
 		i.second->Unload();
 		delete i.second;
 	}
@@ -293,18 +275,23 @@ bool Game::LoadShaders()
 
 void Game::CreateSpriteVerts()
 {
+	// 短形の頂点バッファ　　頂点座標(Vector3), テクスチャ座標(Vector2), 頂点カラー(RGBA)
+	// 頂点座標は、中央が原点、右・奥・上方向に+x,+y,+z方向
+	// テクスチャ座標は、左上が原点
 	float vertices[] = {
-		-0.5f,  0.5f, 0.f, 0.f, 0.f, // top left
-		 0.5f,  0.5f, 0.f, 1.f, 0.f, // top right
-		 0.5f, -0.5f, 0.f, 1.f, 1.f, // bottom right
-		-0.5f, -0.5f, 0.f, 0.f, 1.f  // bottom left
+		-0.5f,  0.5f, 0.f, 0.f, 0.f, 1.f, 0.f, 0.f, 1.f,			// 左上  
+		 0.5f,  0.5f, 0.f, 1.f, 0.f, 0.f, 1.f, 0.f, 1.f,			// 右上
+		 0.5f, -0.5f, 0.f, 1.f, 1.f, 0.f, 0.f, 1.f, 1.f,			// 右下
+		-0.5f, -0.5f, 0.f, 0.f, 1.f, 0.5f, 0.5f, 0.5f, 1.f			// 左下
 	};
-
+	// インデックスバッファ
+	// 頂点バッファの順番にID 0,1,2,3が割り当てられており、ポリゴンの頂点IDを３つ指定する。
 	unsigned int indices[] = {
-		0, 1, 2,
-		2, 3, 0
+		0, 1, 2,		// 左上 , 右上 , 右下
+		2, 3, 0			// 右下 , 左下 , 左上
 	};
 
+	// 頂点バッファの数＝4 ,  インデックスバッファの数=6
 	mSpriteVerts = new VertexArray(vertices, 4, indices, 6);
 }
 
