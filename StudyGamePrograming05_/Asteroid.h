@@ -13,5 +13,6 @@ public:
 
 private:
 	class CircleComponent* mCircle;		//衝突チェックのためのアクセスポインタ。他のオブジェクトから参照するため。
+	float mAsteroidCooldown;		//復活or増殖までの待機時間
 };
 

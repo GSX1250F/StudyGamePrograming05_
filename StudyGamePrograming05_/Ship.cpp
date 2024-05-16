@@ -15,6 +15,7 @@ Ship::Ship(Game* game)
 	  mLaserCooldown(0.0f),
 	  mCrashCooldown(0.0f),
 	  mShipCooldown(0.0f),
+	  mAsteroidCooldown(3.0f),
 	  crashPos(Vector2(0.0f,0.0f)),
 	  crash(false)
 {
@@ -112,6 +113,12 @@ void Ship::ActorInput(const uint8_t* keyState)
 void Ship::UpdateActor(float deltaTime)
 {
 	mLaserCooldown -= deltaTime;	//ƒŒ[ƒU[‚ğŸ‚ÉŒ‚‚Ä‚é‚Ü‚Å‚ÌŠÔ
+	mAsteroidCooldown -= deltaTime;
+	if (mAsteroidCooldown < 0.0f)
+	{
+		GetGame()->IncreaseAsteroid();
+		mAsteroidCooldown = 3.0f;
+	}
 
 	if (crash == false)
 	{
@@ -130,9 +137,9 @@ void Ship::UpdateActor(float deltaTime)
 		//¬˜f¯‚ÆÕ“Ë‚µ‚½‚©‚ğ”»’è
 		for (auto ast : GetGame()->GetAsteroids())
 		{
-			if (Intersect(*mCircle, *(ast->GetCircle())))
+			if (Intersect(*mCircle, *(ast->GetCircle())) && ast->GetState() == EActive)
 			{
-				//¬˜f¯‚ÆÕ“Ë‚µ‚½‚Æ‚«
+				//¬˜f¯‚ÆÕ“Ë
 				crashPos = GetPosition();
 				crashRot = GetRotation();
 				crash = true;

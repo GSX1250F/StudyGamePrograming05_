@@ -18,6 +18,8 @@ private:
 	bool crash;				//衝突検知
 	float mCrashCooldown;		//衝突演出時間
 	float mShipCooldown;		//衝突演出後、リセットされるまでスプライトを消す時間
+	float mAsteroidCooldown;		//小惑星増殖までの待機時間
+
 
 	class InputComponent* mInput;
 	class CircleComponent* mCircle;

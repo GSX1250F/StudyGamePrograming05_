@@ -17,6 +17,7 @@ const Vector2& CircleComponent::GetCenter() const
 
 bool Intersect(const CircleComponent& a, const CircleComponent& b)
 {
+	
 	// ‚Q‚Â‚ÌCircleComponent‚Ì’†SŠÔ‹——£‚Ì2æ‚ğŒvZ
 	Vector2 diff = a.GetCenter() - b.GetCenter();
 	float distSq = diff.LengthSq();
