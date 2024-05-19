@@ -76,11 +76,19 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>..\..\external\SDL2\include;..\..\external\SOIL\include;..\..\external\GLEW\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>..\..\external\SDL2\lib\$(PlatformTarget);..\..\external\SOIL\lib\$(PlatformTarget);..\..\external\GLEW\lib\$(PlatformTarget)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;SDL2test.lib;SOIL.lib;glew32.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy "..\..\external\SDL2\lib\$(PlatformTarget)\*.dll" "$(OutDir)" /i/s/y
+xcopy "..\..\external\SOIL\lib\$(PlatformTarget)\*.dll" "$(OutDir)" /i/s/y
+xcopy "..\..\external\GLEW\lib\$(PlatformTarget)\*.dll" "$(OutDir)" /i/s/y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -104,18 +112,17 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\..\external\SDL2\include;..\..\external\SDL2_image\include;..\..\external\SOIL2\include;..\..\external\GLEW\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\external\SDL2\include;..\..\external\SOIL\include;..\..\external\GLEW\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>..\..\external\SDL2\lib\$(PlatformTarget);..\..\external\SDL2_image\lib\$(PlatformTarget);..\..\external\SOIL2\lib\$(PlatformTarget);..\..\external\GLEW\lib\$(PlatformTarget)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SOIL2.lib;glew32.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\external\SDL2\lib\$(PlatformTarget);..\..\external\SOIL\lib\$(PlatformTarget);..\..\external\GLEW\lib\$(PlatformTarget)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SOIL.lib;glew32.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy "..\..\external\SDL2\lib\$(PlatformTarget)\*.dll" "$(OutDir)" /i/s/y
-xcopy "..\..\external\SDL2_image\lib\$(PlatformTarget)\*.dll" "$(OutDir)" /i/s/y
-xcopy "..\..\external\SOIL2\lib\$(PlatformTarget)\*.dll" "$(OutDir)" /i/s/y
+xcopy "..\..\external\SOIL\lib\$(PlatformTarget)\*.dll" "$(OutDir)" /i/s/y
 xcopy "..\..\external\GLEW\lib\$(PlatformTarget)\*.dll" "$(OutDir)" /i/s/y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
