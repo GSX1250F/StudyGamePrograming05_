@@ -188,6 +188,18 @@ xcopy "..\..\external\GLEW\lib\$(PlatformTarget)\*.dll" "$(OutDir)" /i/s/y</Comm
     <None Include="Shaders\Sprite.vert" />
     <None Include="Shaders\Transform.vert" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\Asteroid.png" />
+    <Image Include="Assets\Farback01.png" />
+    <Image Include="Assets\Farback02.png" />
+    <Image Include="Assets\Laser.png" />
+    <Image Include="Assets\Ship01.png" />
+    <Image Include="Assets\Ship02.png" />
+    <Image Include="Assets\Ship03.png" />
+    <Image Include="Assets\Ship04.png" />
+    <Image Include="Assets\Ship05.png" />
+    <Image Include="Assets\Stars.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="..\packages\nupengl.core.redist.0.1.0.1\build\native\nupengl.core.redist.targets" Condition="Exists('..\packages\nupengl.core.redist.0.1.0.1\build\native\nupengl.core.redist.targets')" />
