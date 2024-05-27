@@ -34,7 +34,8 @@ public:
 	void AddBackGround(class BackGround* bg);
 	void IncreaseAsteroid();
 	int numAsteroids;
-	
+	class ClearPict* mClearPict;	//ƒQ[ƒ€ƒNƒŠƒA‰æ‘œ
+
 private:
 	void ProcessInput();
 	void UpdateGame();
