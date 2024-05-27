@@ -218,8 +218,9 @@ void Game::LoadData()
 	mShip = new Ship(this);
 
 	// ¬˜f¯‚ğÅ‰‚É•¡”¶¬
-	int numAsteroids = 20;		//‰Šú’l
-	for (int i = 0; i < numAsteroids; i++)
+	int initNumAsteroids = 15;		//‰Šú’l
+	numAsteroids = 0;
+	for (int i = 0; i < initNumAsteroids; i++)
 	{
 		IncreaseAsteroid();
 	}
@@ -313,6 +314,7 @@ Texture* Game::GetTexture(const std::string& fileName)
 void Game::IncreaseAsteroid()
 {
 	new Asteroid(this);
+	numAsteroids++;
 }
 
 void Game::AddAsteroid(Asteroid* ast)
@@ -327,6 +329,7 @@ void Game::RemoveAsteroid(Asteroid* ast)
 	{
 		mAsteroids.erase(iter);
 	}
+	numAsteroids--;
 }
 
 void Game::AddBackGround(BackGround* bg)

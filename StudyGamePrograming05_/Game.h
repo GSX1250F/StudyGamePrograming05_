@@ -23,17 +23,18 @@ public:
 
 	void SetRunning(bool isrunning) { mIsRunning = isrunning; }
 
+	//ゲームウィンドウの大きさ
+	int mWindowWidth;
+	int mWindowHeight;
+	
 	//Game-specific	
 	void AddAsteroid(class Asteroid* ast);
 	void RemoveAsteroid(class Asteroid* ast);
 	std::vector<class Asteroid*>& GetAsteroids() { return mAsteroids; }
 	void AddBackGround(class BackGround* bg);
 	void IncreaseAsteroid();
+	int numAsteroids;
 	
-	//ゲームウィンドウの大きさ
-	int mWindowWidth;
-	int mWindowHeight;
-
 private:
 	void ProcessInput();
 	void UpdateGame();

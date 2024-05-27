@@ -114,10 +114,10 @@ void Ship::UpdateActor(float deltaTime)
 {
 	mLaserCooldown -= deltaTime;	//ƒŒ[ƒU[‚ğŸ‚ÉŒ‚‚Ä‚é‚Ü‚Å‚ÌŠÔ
 	mAsteroidCooldown -= deltaTime;
-	if (mAsteroidCooldown < 0.0f)
+	if (mAsteroidCooldown < 0.0f && GetGame()->numAsteroids > 0)
 	{
 		GetGame()->IncreaseAsteroid();
-		mAsteroidCooldown = 3.0f;
+		mAsteroidCooldown = 5.0f;
 	}
 
 	if (crash == false)
