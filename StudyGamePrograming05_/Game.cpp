@@ -1,5 +1,5 @@
 #include "Game.h"
-#include <gl/glew.h>
+#include <glew.h>
 #include "Texture.h"
 #include "VertexArray.h"
 #include "Shader.h"
